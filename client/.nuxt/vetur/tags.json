@@ -1,0 +1,17 @@
+{
+  "Module": {
+    "description": "Auto imported from components/Module.vue"
+  },
+  "Modules": {
+    "description": "Auto imported from components/Modules.vue"
+  },
+  "Settings": {
+    "description": "Auto imported from components/Settings.vue"
+  },
+  "Student": {
+    "description": "Auto imported from components/Student.vue"
+  },
+  "Teacher": {
+    "description": "Auto imported from components/Teacher.vue"
+  }
+}

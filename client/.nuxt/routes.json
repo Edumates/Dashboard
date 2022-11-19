@@ -1,0 +1,16 @@
+[
+  {
+    "name": "class-id",
+    "path": "/class/:id?",
+    "component": "C:\\\\Users\\\\bryan\\\\Documents\\\\GitHub\\\\edrys\\\\client\\\\pages\\\\class\\\\_id.vue",
+    "chunkName": "pages/class/_id",
+    "_name": "_34aa16a6"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\bryan\\\\Documents\\\\GitHub\\\\edrys\\\\client\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_2677259e"
+  }
+]
