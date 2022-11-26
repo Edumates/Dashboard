@@ -270,9 +270,9 @@
               }
             }
           </style>
-          <div id="lepopuptab-side-tab-right1" class="lepopuptab lepopuptab-right-middle lepopuptab-24" onclick="lepopup_popup_open('side-tab-popup-right');" 
+          <div id="lepopuptab-side-tab-right1" class="lepopuptab lepopuptab-right-middle lepopuptab-24" 
                data-toggle="container-ls" data-target="#container-ls">
-            <div class="lepopuptab-content" title="Feedback">
+            <div id="lepopuptab-side-tab-feedback" class="lepopuptab-content" title="Feedback" class="lepopuptab-content" onclick="lepopup_popup_open('side-tab-popup-right');">
               <i class="lepopuptab-icon-left lepopuptab-no-icon">J
               </i>
               <span>Feedback
@@ -280,19 +280,21 @@
             </div>
             <script>
               function openComplaintsForm() {
-                var bg = document.getElementById("lepopuptab-side-tab-right1");
-                var feedback = document.getElementById("help-form");
+                var feedback = document.getElementById("lepopuptab-side-tab-right1");
+                var bg = document.getElementById("lepopuptab-side-tab-right");
+                //var feedback = document.getElementById("help-form");
                 if(feedback.style.transform != "rotate(0deg)")  {
                   feedback.style.transform = "rotate(0deg)"
-                  feedback.style.zIndex = "100001"
+                  feedback.style.zIndex="100000"
                 }
                 else{
                   feedback.style.transform = "rotate(-90deg)"
-                  feedback.style.zIndex = "99999"
+                  feedback.style.zIndex="999995"
                 }
               }
-              document.getElementById("lepopuptab-side-tab-right1").onclick = openComplaintsForm;
+              document.getElementById("lepopuptab-side-tab-feedback").onclick = openComplaintsForm;
             </script>
+          
             <div class="help-form" style="
                                           position: fixed;
                                           transform: rotate(0deg);
@@ -451,15 +453,25 @@
     const feedbackFormData = new FormData(feedbackForm);
     const data = Object.fromEntries(feedbackFormData);
     console.log(JSON.stringify(data))
+    let xhr = new XMLHttpRequest();
+xhr.open("POST", "https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/feedback");
+xhr.setRequestHeader("Accept", "application/json");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    console.log(xhr.status);
+    console.log(xhr.responseText);
+  }};
+xhr.send(JSON.stringify(data));
 
-    fetch('https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/feedback', {
+    /*fetch('https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/feedback', {
       method: 'POST',
       headers:{
         'Content-Type':'application/json',
         'Access-Control-Allow-Origin': '*'
       },
       body:JSON.stringify(data)
-    }).then(res=> res.json()).then(data => console.log(data)).catch(error => console.log());
+    }).then(res=> res.json()).then(data => console.log(data)).catch(error => console.log());*/
   }
                              )
 </script>
@@ -600,9 +612,8 @@
           text-decoration: none;
         }
       </style>
-      <div id="lepopuptab-side-tab-right" class="lepopuptab lepopuptab-right-middle lepopuptab-24" onclick="lepopup_popup_open('side-tab-popup-right');"  
-           >
-        <div class="lepopuptab-content" title="Complaints">
+      <div id="lepopuptab-side-tab-right" class="lepopuptab lepopuptab-right-middle lepopuptab-24"  >
+        <div id="lepopuptab-side-tab-right_Title" class="lepopuptab-content" title="Complaints" onclick="lepopup_popup_open('side-tab-popup-right');">
           <i class="lepopuptab-icon-left lepopuptab-no-icon" >J
           </i>
           <span>Complaints
@@ -611,13 +622,12 @@
         <script>
           function changeBackgroundIMG() {
             var bg = document.getElementById("lepopuptab-side-tab-right");
-            var formcomplaint = document.getElementById("")
             if(bg.style.transform != "rotate(0deg)")  
               bg.style.transform = "rotate(0deg)"
               else
                 bg.style.transform = "rotate(-90deg)"
                 }
-          document.getElementById("lepopuptab-side-tab-right").onclick = changeBackgroundIMG;
+          document.getElementById("lepopuptab-side-tab-right_Title").onclick = changeBackgroundIMG;
         </script>
         <div class="help-form" style="
                                       position: fixed;
@@ -748,6 +758,27 @@
         padding-left:20px;
       }
     </style>
+    <script>
+      const feedbackForm = document.querySelector("#feedback-form") 
+      feedbackForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const feedbackFormData = new FormData(feedbackForm);
+        const data = Object.fromEntries(feedbackFormData);
+        console.log(JSON.stringify(data))
+        let xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/feedback");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        console.log(xhr.status);
+        console.log(xhr.responseText);
+      }};
+    xhr.send(JSON.stringify(data));
+    }
+    )
+    </script>
+    
     <div class="slick-list draggable">
       <div class="slick-track" style="opacity: 1; width: 2025px; animation: fadeIn 5s; ">
         <div
@@ -3509,16 +3540,35 @@
     const data = Object.fromEntries(formData);
     console.log(JSON.stringify(data))
 
-    fetch('https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/feedback', {
+    /*fetch('https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/signup', {
       method: 'POST',
       headers:{
         'Content-Type':'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
       },
       body:JSON.stringify(data)
     }).then(res=> res.json()).then(data => console.log(data)).catch(error => console.log());
-  }
-                             )
+  })*/
+let xhr = new XMLHttpRequest();
+xhr.open("POST", "https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/signup");
+xhr.setRequestHeader("Accept", "application/json");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    console.log(xhr.status);
+    console.log(xhr.responseText);
+  }};
+xhr.send(JSON.stringify(data));
+/*
+let data = `{
+  "Id": 78912,
+  "Customer": "Jason Sweet",
+  "Quantity": 1,
+  "Price": 18.00
+}`;*/
+
+xhr.send(JSON.stringify(data));
+  })                     
 </script>
 
 
@@ -3867,7 +3917,17 @@
     const formsigninData = new FormData(formsignin);
     const data = Object.fromEntries(formsigninData);
     console.log(JSON.stringify(data))
-
+    let xhr = new XMLHttpRequest();
+xhr.open("POST", "https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/feedback");
+xhr.setRequestHeader("Accept", "application/json");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    console.log(xhr.status);
+    console.log(xhr.responseText);
+  }};
+xhr.send(JSON.stringify(data));
+/*
     fetch('https://iozb07mqz3.execute-api.ap-south-1.amazonaws.com/v1/api/feedback', {
       method: 'POST',
       headers:{
@@ -3875,7 +3935,7 @@
         'Access-Control-Allow-Origin': '*'
       },
       body:JSON.stringify(data)
-    }).then(res=> res.json()).then(data => console.log(data)).catch(error => console.log());
+    }).then(res=> res.json()).then(data => console.log(data)).catch(error => console.log());*/
   }
                              )
 </script>
